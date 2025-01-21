@@ -8,8 +8,8 @@ local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Parent = game.CoreGui
 
 local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.new(0, 300, 0, 450)
-MainFrame.Position = UDim2.new(0.5, -150, 0.5, -225)
+MainFrame.Size = UDim2.new(0, 300, 0, 500)
+MainFrame.Position = UDim2.new(0.5, -150, 0.5, -250)
 MainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 MainFrame.BorderSizePixel = 0
 MainFrame.Parent = ScreenGui
@@ -88,6 +88,7 @@ local getSpinBotValue = CreateSlider("Spin Bot Speed", 110, 0, 360, 0)
 local getYawValue = CreateSlider("Yaw Offset", 170, -180, 180, 0)
 local getBodyYawValue = CreateSlider("Body Yaw", 230, -180, 180, 0)
 local getDefensiveValue = CreateSlider("Defensive Level", 290, 0, 100, 0)
+local getDefensiveHeadValue = CreateSlider("Defensive Head", 350, -90, 90, 0)
 
 -- Логика для каждого параметра
 local function applyAntiAim()
@@ -95,6 +96,7 @@ local function applyAntiAim()
     local yawValue = getYawValue()
     local bodyYawValue = getBodyYawValue()
     local defensiveValue = getDefensiveValue()
+    local defensiveHeadValue = getDefensiveHeadValue()
 
     -- Spin Bot логика
     if spinBotValue > 0 then
@@ -125,6 +127,15 @@ local function applyAntiAim()
         local humanoidRootPart = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
         if humanoidRootPart then
             LocalPlayer.Character:SetPrimaryPartCFrame(humanoidRootPart.CFrame * CFrame.Angles(math.rad(180), 0, 0))
+        end
+    end
+
+    -- Defensive Head логика (камера смотрит вверх или вниз)
+    if defensiveHeadValue ~= 0 then
+        local head = LocalPlayer.Character:FindFirstChild("Head")
+        if head then
+            LocalPlayer.Character.Humanoid.CameraOffset = Vector3.new(0, 0, 0) -- Фиксация камеры
+            head.CFrame = head.CFrame * CFrame.Angles(math.rad(defensiveHeadValue), 0, 0)
         end
     end
 end

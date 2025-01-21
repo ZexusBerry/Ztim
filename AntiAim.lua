@@ -84,10 +84,10 @@ local function CreateSlider(name, positionY, min, max, default)
 end
 
 -- Слайдеры для параметров
-local getSpinBotValue = CreateSlider("Spin Bot Speed", 110, 0, 360, 90)
+local getSpinBotValue = CreateSlider("Spin Bot Speed", 110, 0, 360, 0)
 local getYawValue = CreateSlider("Yaw Offset", 170, -180, 180, 0)
-local getBodyYawValue = CreateSlider("Body Yaw", 230, -180, 180, 45)
-local getDefensiveValue = CreateSlider("Defensive Level", 290, 0, 100, 50)
+local getBodyYawValue = CreateSlider("Body Yaw", 230, -180, 180, 0)
+local getDefensiveValue = CreateSlider("Defensive Level", 290, 0, 100, 0)
 
 -- Логика для каждого параметра
 local function applyAntiAim()
